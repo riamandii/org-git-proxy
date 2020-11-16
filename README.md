@@ -13,7 +13,7 @@ sudo apt-get update; \
   sudo apt-get install -y dotnet-runtime-2.1
   
 ### Start the server
-sudo dotnet runtime-2
+sudo dotnet run
 
 ### Configure the server
 
