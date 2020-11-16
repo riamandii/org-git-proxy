@@ -4,7 +4,7 @@
 
 A basic Web proxy for GitHub API
 
-## Building
+## Building & Running
 
 ### Instal dotnet-runtime-2.1
 ```
@@ -25,27 +25,27 @@ sudo dotnet run
 
 Configure the listening port and GitHub API Key in .GitProxy/Properties/launchSettings.Json
 
-### Design
+## Design
 
-#### Controllers
+### Controllers
 
 There are 3 main controllers, configured to accept requests from different exposed APIs: view/top APIs are handled by ViewController, healthcheck API by ProbeController, and all other APIs by GitProxyController.
 
 Controllers sanitize the requests and call the necessary business components to execute the request. Controllers are asynchronous to not block the available threads on long I/O operations.
 
-#### Endpoint Proxy
+### Endpoint Proxy
 
 EndpointProxy is the main business router/manager of requests. EndpointProxy is responsible for determining if the request is forwared to endpoint, retrieved from cache, or updated in cache. EndpointProxy also is responsible for refreshing the configured set of APIs in the background
 
-#### EndpointCacheManager
+### EndpointCacheManager
 
 This component is responsible for storing and retrieving cached objects in memory. Aditionally this class can be decorated with File / persistent storage support, for faster bootstrap, and durability
 
-#### ViewManager
+### ViewManager
 
 This components is responsible for applying the custom aggregation logic on cached data, and storing it appropriately in another in-memory cache
 
-#### Startup.cs
+### Startup.cs
 
 This file glues all the components together at server's startup time.
 
