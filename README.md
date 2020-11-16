@@ -7,17 +7,23 @@ A basic Web proxy for GitHub API
 ## Building
 
 ### Instal dotnet-runtime-2.1
-sudo apt-get update; \
+```
+  sudo apt-get update; \
   sudo apt-get install -y apt-transport-https && \
   sudo apt-get update && \
   sudo apt-get install -y dotnet-runtime-2.1
+```
   
 ### Start the server
+Start the Http Web Proxy by executing the below command inside ./GitProxy folder
+
+```
 sudo dotnet run
+```
 
 ### Configure the server
 
-Configure the listening port and GitHub API Key in launchSettings.Json
+Configure the listening port and GitHub API Key in .GitProxy/Properties/launchSettings.Json
 
 ### Design
 
