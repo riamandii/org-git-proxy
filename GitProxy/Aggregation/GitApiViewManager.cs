@@ -30,6 +30,7 @@ namespace GitProxy.Aggregation
                 case "forks":
                 case "open_issues":
                 case "last_updated":
+                case "stars":
                     return resourceCache[dimension].Take(count).ToArray();
                 default:
                     throw new InvalidOperationException($"Dimension {dimension} not supported by view aggregator");
@@ -49,6 +50,7 @@ namespace GitProxy.Aggregation
             UpdateForksView(multiPageResult);
             UpdateUpdatedTimeView(multiPageResult);
             UpdateIssuesView(multiPageResult);
+            UpdateStarsView(multiPageResult);
         }
 
         private void UpdateForksView(GitResponseMultiPage multiPageResponse)
@@ -70,6 +72,13 @@ namespace GitProxy.Aggregation
             var byForks = ((JArray)multiPageResponse.JsonResult).Children().ToList().OrderByDescending(x => Convert.ToInt32(x["open_issues_count"].ToString()))
                 .Select(x => GetTokenValue(x["name"].ToString(), x["open_issues_count"].ToString())).ToArray();
             this.resourceCache.AddOrUpdate("open_issues", byForks, (key, oldvalue) => byForks);
+        }
+        
+        private void UpdateStarsView(GitResponseMultiPage multiPageResponse)
+        {
+            var byForks = ((JArray)multiPageResponse.JsonResult).Children().ToList().OrderByDescending(x => Convert.ToInt32(x["stargazers_count"].ToString()))
+                .Select(x => GetTokenValue(x["name"].ToString(), x["stargazers_count"].ToString())).ToArray();
+            this.resourceCache.AddOrUpdate("stars", byForks, (key, oldvalue) => byForks);
         }
 
         private JToken GetTokenValue(string name, string value)
