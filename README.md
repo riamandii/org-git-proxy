@@ -6,14 +6,17 @@ A basic Web proxy for GitHub API
 
 ## Building & Running
 
-### Instal dotnet-runtime-2.1
+### Instal dotnet-runtime-2.1 on Ubuntu
 ```
   sudo apt-get update; \
   sudo apt-get install -y apt-transport-https && \
   sudo apt-get update && \
   sudo apt-get install -y dotnet-runtime-2.1
 ```
-  
+### Install dotnet runtime and asp.net core on MacOS
+
+Download and install latest .net libraries "ASP.NET Core Runtime 2.1.23" and ".NET Core Runtime 2.1.23" from https://dotnet.microsoft.com/download/dotnet-core/2.1
+
 ### Start the server
 Start the Http Web Proxy by executing the below command inside ./GitProxy folder
 
